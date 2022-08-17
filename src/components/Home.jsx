@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Col, Row, Statistic, Typography } from 'antd';
+import { useGetCryptosQuery } from '../services/CryptoApi';
 
 const Home = () => {
+  const { data, isFetching } = useGetCryptosQuery();
+  console.log(data);
   return (
     <>
       <Typography.Title level={2} className="heading">
