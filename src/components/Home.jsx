@@ -5,8 +5,14 @@ import { useCryptosQuery } from '../services/CryptoApi';
 
 const Home = () => {
   const { data, isFetching } = useCryptosQuery();
-  console.log({ data });
-  console.log(useCryptosQuery());
+  const {
+    totalCoins,
+    totalExchanges,
+    totalMarketCap,
+    totalMarkets,
+    total24hVolume,
+  } = data.data.stats;
+
   return (
     <>
       <Typography.Title level={2} className="heading">
@@ -14,19 +20,19 @@ const Home = () => {
       </Typography.Title>
       <Row>
         <Col span={12}>
-          <Statistic title="Total Cryptocurrencies" value={5} />
+          <Statistic title="Total Cryptocurrencies" value={totalCoins} />
         </Col>
         <Col span={12}>
-          <Statistic title="Exchanges" value={5} />
+          <Statistic title="Exchanges" value={totalExchanges} />
         </Col>
         <Col span={12}>
-          <Statistic title="Market Cap" value={5} />
+          <Statistic title="Market Cap" value={totalMarketCap} />
         </Col>
         <Col span={12}>
-          <Statistic title="Total 24h volume" value={5} />
+          <Statistic title="Total 24h volume" value={total24hVolume} />
         </Col>
         <Col span={12}>
-          <Statistic title="Total Markets" value={5} />
+          <Statistic title="Total Markets" value={totalMarkets} />
         </Col>
       </Row>
     </>
