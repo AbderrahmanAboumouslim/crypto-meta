@@ -58,6 +58,21 @@ a:hover {
   color: white;
 }
 
+.home-heading-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.home-title {
+  font-size: 1.4rem !important;
+}
+
+.show-more {
+  margin-top: 0px !important;
+}
+
 /* Footer */
 .footer {
   background-color: #001529;
