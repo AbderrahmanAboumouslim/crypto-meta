@@ -8,10 +8,11 @@ const Cryptos = () => {
   const { data: CryptoList, isFetching } = useCryptosQuery();
   const [cryptos, setCryptos] = useState(CryptoList?.data?.coins);
   console.log(cryptos);
+  const lessCrypto = cryptos.slice(0, 10);
   return (
     <>
       <Row gutter={[33, 33]} className="crypto-card-container">
-        {cryptos.map(coin => (
+        {lessCrypto.map(coin => (
           <Col xs={24} sm={12} lg={6} className="crypto-card" key={coin.uuid}>
             <Link to={`crypto/${coin.uuid}`}>
               <Card
@@ -21,7 +22,7 @@ const Cryptos = () => {
               >
                 <p>Price: {millify(coin.price)}</p>
                 <p>Market Cap: {millify(coin.marketCap)}</p>
-                <p>Daily Change: {millify(coin.change)}</p>
+                <p>Daily Change: {millify(coin.change)}%</p>
               </Card>
             </Link>
           </Col>
