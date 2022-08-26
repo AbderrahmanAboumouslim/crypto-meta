@@ -7,7 +7,7 @@ import Cryptos from './Cryptos';
 import News from './News';
 
 const Home = () => {
-  const { data, isFetching } = useCryptosQuery();
+  const { data, isFetching } = useCryptosQuery(10);
   const stats = data?.data?.stats;
 
   if (isFetching) return console.log('Still loading...');

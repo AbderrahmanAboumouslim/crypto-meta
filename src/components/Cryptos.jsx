@@ -4,15 +4,18 @@ import { useCryptosQuery } from '../services/CryptoApi';
 import { Link } from 'react-router-dom';
 import millify from 'millify';
 
-const Cryptos = () => {
-  const { data: CryptoList, isFetching } = useCryptosQuery();
+const Cryptos = ({ simplified }) => {
+  const count = simplified ? 10 : 100;
+  const { data: CryptoList, isFetching } = useCryptosQuery(count);
   const [cryptos, setCryptos] = useState(CryptoList?.data?.coins);
   console.log(cryptos);
-  const lessCrypto = cryptos.slice(0, 10);
+
+  if (isFetching) return console.log('Loading...');
+
   return (
     <>
       <Row gutter={[33, 33]} className="crypto-card-container">
-        {lessCrypto.map(coin => (
+        {cryptos.map(coin => (
           <Col xs={24} sm={12} lg={6} className="crypto-card" key={coin.uuid}>
             <Link to={`crypto/${coin.uuid}`}>
               <Card
