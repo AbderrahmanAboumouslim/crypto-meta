@@ -24,14 +24,14 @@ const Cryptos = ({ simplified }) => {
 
   return (
     <>
-      {!simplified ? (
+      {!simplified && (
         <div className="search-crypto">
           <Input
             onChange={e => setSearch(e.target.value)}
             placeholder="Find Cryptocurrencies"
           />
         </div>
-      ) : null}
+      )}
 
       <Row gutter={[33, 33]} className="crypto-card-container">
         {cryptos.map(coin => (
