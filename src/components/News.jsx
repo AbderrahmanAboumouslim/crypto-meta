@@ -1,13 +1,19 @@
-import { Col, Row, Typography, Card, Avatar } from 'antd';
+import React, { useState } from 'react';
+import { Col, Row, Typography, Card, Avatar, Select } from 'antd';
+import { Option } from 'antd/lib/mentions';
 import moment from 'moment';
-import React from 'react';
 import { useNewsQuery } from '../services/NewsApi';
+import { useCryptosQuery } from '../services/CryptoApi';
 
 const standardImage =
   'https://media.istockphoto.com/photos/bitcoin-cryptocurrency-trends-graphs-and-charts-picture-id1294303237?k=20&m=1294303237&s=612x612&w=0&h=0-igz1A4-GdGa-ApF4Mvyxc4-NLjcZ6DFNWW4ptVFYA=';
 const News = ({ simplified }) => {
+  const { data } = useCryptosQuery(100);
+
+  const [newsCategory, setNewsCategory] = useState('');
+
   const { data: cryptoNews } = useNewsQuery({
-    newsCategory: 'Cryptocurrency',
+    newsCategory,
     count: simplified ? 6 : 20,
   });
   console.log(cryptoNews);
@@ -16,14 +22,31 @@ const News = ({ simplified }) => {
 
   return (
     <Row gutter={[25, 25]}>
+      <Col span={24}>
+        <Select
+          className="select-news"
+          showSearch
+          placeholder="News by Cryptos"
+          optionFilterProp="children"
+          onChange={x => setNewsCategory(x)}
+          filterOption={(input, option) =>
+            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+          }
+        >
+          <Option value="Cryptocurrency">Cryptocurrency</Option>
+          {data?.data.coins.map((coin, i) => (
+            <Option value={coin.name}>{coin.name}</Option>
+          ))}
+        </Select>
+      </Col>
       {cryptoNews.value.map((news, i) => (
         <Col xs={24} sm={12} lg={8} key={i}>
           <Card hoverable className="news-card">
             <a href={news.url} target="_blank" rel="noreferrer">
               <img
                 style={{
-                  width: '100%',
-                  height: '100%',
+                  maxWidth: '200px',
+                  maxHeight: '100px',
                   borderRadius: '1rem',
                   marginBottom: '1rem',
                 }}
