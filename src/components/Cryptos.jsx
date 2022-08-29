@@ -7,7 +7,7 @@ import millify from 'millify';
 const Cryptos = ({ simplified }) => {
   const count = simplified ? 10 : 100;
   const { data: CryptoList, isFetching } = useCryptosQuery(count);
-  const [cryptos, setCryptos] = useState([]);
+  const [cryptos, setCryptos] = useState(CryptoList?.data?.coins);
   const [search, setSearch] = useState('');
 
   useEffect(() => {

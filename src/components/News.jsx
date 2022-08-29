@@ -4,7 +4,7 @@ import React from 'react';
 import { useNewsQuery } from '../services/NewsApi';
 
 const standardImage =
-  'https://www.interactivebrokers.hu/images/web/cryptocurrency-hero.jpg';
+  'https://media.istockphoto.com/photos/bitcoin-cryptocurrency-trends-graphs-and-charts-picture-id1294303237?k=20&m=1294303237&s=612x612&w=0&h=0-igz1A4-GdGa-ApF4Mvyxc4-NLjcZ6DFNWW4ptVFYA=';
 const News = ({ simplified }) => {
   const { data: cryptoNews } = useNewsQuery({
     newsCategory: 'Cryptocurrency',
@@ -49,11 +49,13 @@ const News = ({ simplified }) => {
                     }
                     alt="news"
                   />
-
-                  <Typography.Text>
-                    {moment(news.datePublished).startOf('ss').fromNow()}
+                  <Typography.Text className="provider-name">
+                    {news?.provider[0]?.name}
                   </Typography.Text>
                 </div>
+                <Typography.Text>
+                  {moment(news.datePublished).startOf('ss').fromNow()}
+                </Typography.Text>
               </div>
             </a>
           </Card>
