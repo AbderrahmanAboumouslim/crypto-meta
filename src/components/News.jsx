@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Col, Row, Typography, Card, Avatar, Select } from 'antd';
-import { Option } from 'antd/lib/mentions';
 import moment from 'moment';
 import { useNewsQuery } from '../services/NewsApi';
 import { useCryptosQuery } from '../services/CryptoApi';
+
+const { Option } = Select;
 
 const standardImage =
   'https://media.istockphoto.com/photos/bitcoin-cryptocurrency-trends-graphs-and-charts-picture-id1294303237?k=20&m=1294303237&s=612x612&w=0&h=0-igz1A4-GdGa-ApF4Mvyxc4-NLjcZ6DFNWW4ptVFYA=';
@@ -34,7 +35,7 @@ const News = ({ simplified }) => {
           }
         >
           <Option value="Cryptocurrency">Cryptocurrency</Option>
-          {data?.data.coins.map((coin, i) => (
+          {data?.data.coins.map(coin => (
             <Option value={coin.name}>{coin.name}</Option>
           ))}
         </Select>

@@ -114,6 +114,10 @@ a:hover {
   margin-left: 10px;
 }
 
+.select-news {
+  width: 180px;
+}
+
 /* Footer */
 .footer {
   background-color: #001529;
