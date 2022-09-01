@@ -20,8 +20,9 @@ const { Option } = Select;
 const CryptoDetails = () => {
   const { cryptoId } = useParams();
   const { data } = useDetailsQuery(cryptoId);
+  const cryptoDetails = data?.data?.coin;
+  console.log(cryptoDetails);
   console.log(data);
-  console.log(cryptoId);
 
   const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
 
@@ -81,7 +82,21 @@ const CryptoDetails = () => {
     },
   ];
 
-  return <div>CryptoDetails N: {cryptoId}</div>;
+  return (
+    <>
+      <Col>
+        <Col>
+          <Title>{cryptoDetails.name}</Title>
+          <p>{cryptoDetails.name} live stats, market cap and supply.</p>
+        </Col>
+        <Select>
+          {time.map((t, i) => (
+            <Option>{t}</Option>
+          ))}
+        </Select>
+      </Col>
+    </>
+  );
 };
 
 export default CryptoDetails;
