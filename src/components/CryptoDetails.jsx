@@ -20,32 +20,32 @@ const { Option } = Select;
 const CryptoDetails = () => {
   const { cryptoId } = useParams();
   const { data } = useDetailsQuery(cryptoId);
-  const cryptoDetails = data?.data?.coin;
-  console.log(cryptoDetails);
   console.log(data);
-
+  const coinData = data?.data?.coin;
+  console.log(coinData);
+  console.log('*** the above 24 & 25 are log for cryptoDetails and data');
   const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
 
   const stats = [
     {
       title: 'Price to USD',
-      value: `$ ${cryptoDetails.price && millify(cryptoDetails.price)}`,
+      value: `$ ${coinData.price && millify(coinData.price)}`,
       icon: <DollarCircleOutlined />,
     },
-    { title: 'Rank', value: cryptoDetails.rank, icon: <NumberOutlined /> },
+    { title: 'Rank', value: coinData.rank, icon: <NumberOutlined /> },
     {
       title: '24h Volume',
-      value: `$ ${cryptoDetails.volume && millify(cryptoDetails.volume)}`,
+      value: `$ ${coinData.volume && millify(coinData.volume)}`,
       icon: <ThunderboltOutlined />,
     },
     {
       title: 'Market Cap',
-      value: `$ ${cryptoDetails.marketCap && millify(cryptoDetails.marketCap)}`,
+      value: `$ ${coinData.marketCap && millify(coinData.marketCap)}`,
       icon: <DollarCircleOutlined />,
     },
     {
       title: 'All-time-high(daily avg.)',
-      value: `$ ${millify(cryptoDetails.allTimeHigh.price)}`,
+      value: `$ ${millify(coinData.allTimeHigh.price)}`,
       icon: <TrophyOutlined />,
     },
   ];
@@ -53,31 +53,27 @@ const CryptoDetails = () => {
   const genericStats = [
     {
       title: 'Number Of Markets',
-      value: cryptoDetails.numberOfMarkets,
+      value: coinData.numberOfMarkets,
       icon: <FundOutlined />,
     },
     {
       title: 'Number Of Exchanges',
-      value: cryptoDetails.numberOfExchanges,
+      value: coinData.numberOfExchanges,
       icon: <MoneyCollectOutlined />,
     },
     {
       title: 'Aprroved Supply',
-      value: cryptoDetails.approvedSupply ? (
-        <CheckOutlined />
-      ) : (
-        <StopOutlined />
-      ),
+      value: coinData.approvedSupply ? <CheckOutlined /> : <StopOutlined />,
       icon: <ExclamationCircleOutlined />,
     },
     {
       title: 'Total Supply',
-      value: `$ ${millify(cryptoDetails.totalSupply)}`,
+      value: `$ ${millify(coinData.totalSupply)}`,
       icon: <ExclamationCircleOutlined />,
     },
     {
       title: 'Circulating Supply',
-      value: `$ ${millify(cryptoDetails.circulatingSupply)}`,
+      value: `$ ${millify(coinData.circulatingSupply)}`,
       icon: <ExclamationCircleOutlined />,
     },
   ];
@@ -86,8 +82,10 @@ const CryptoDetails = () => {
     <>
       <Col>
         <Col>
-          <Title>{cryptoDetails.name}</Title>
-          <p>{cryptoDetails.name} live stats, market cap and supply.</p>
+          <Title>
+            {coinData.name} {coinData.slug}
+          </Title>
+          <p>{coinData.name} live stats, market cap and supply.</p>
         </Col>
         <Select>
           {time.map((t, i) => (

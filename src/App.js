@@ -1,5 +1,5 @@
-import { Layout, Space, Typography } from 'antd';
 import React from 'react';
+import { Layout, Space, Typography } from 'antd';
 import './App.css';
 import { Routes, Route, Link } from 'react-router-dom';
 import {
@@ -26,7 +26,7 @@ function App() {
                 <Route path="/exchanges" element={<Exchanges />} />
                 <Route path="/news" element={<News />} />
                 <Route path="/cryptos" element={<Cryptos />} />
-                <Route path="/crypto/:cryptoId" element={<CryptoDetails />} />
+                <Route path="/coin/:cryptoId" element={<CryptoDetails />} />
               </Routes>
             </div>
           </Layout>

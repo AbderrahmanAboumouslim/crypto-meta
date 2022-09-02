@@ -34,9 +34,9 @@ const Cryptos = ({ simplified }) => {
       )}
 
       <Row gutter={[33, 33]} className="crypto-card-container">
-        {cryptos.map(coin => (
+        {cryptos?.map(coin => (
           <Col xs={24} sm={12} lg={6} className="crypto-card" key={coin.uuid}>
-            <Link to={`crypto/${coin.uuid}`}>
+            <Link to={`/coin/${coin?.uuid}`}>
               <Card
                 title={`${coin.rank}. ${coin.name}`}
                 extra={<img className="crypto-image" src={coin.iconUrl} />}
