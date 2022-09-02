@@ -23,23 +23,26 @@ const News = ({ simplified }) => {
 
   return (
     <Row gutter={[25, 25]}>
-      <Col span={24}>
-        <Select
-          className="select-news"
-          showSearch
-          placeholder="News by Cryptos"
-          optionFilterProp="children"
-          onChange={x => setNewsCategory(x)}
-          filterOption={(input, option) =>
-            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-          }
-        >
-          <Option value="Cryptocurrency">Cryptocurrency</Option>
-          {data?.data.coins.map(coin => (
-            <Option value={coin.name}>{coin.name}</Option>
-          ))}
-        </Select>
-      </Col>
+      {!simplified && (
+        <Col span={24}>
+          <Select
+            className="select-news"
+            showSearch
+            placeholder="News by Cryptos"
+            optionFilterProp="children"
+            onChange={x => setNewsCategory(x)}
+            filterOption={(input, option) =>
+              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
+          >
+            <Option value="Cryptocurrency">Cryptocurrency</Option>
+            {data?.data.coins.map(coin => (
+              <Option value={coin.name}>{coin.name}</Option>
+            ))}
+          </Select>
+        </Col>
+      )}
+
       {cryptoNews.value.map((news, i) => (
         <Col xs={24} sm={12} lg={8} key={i}>
           <Card hoverable className="news-card">
