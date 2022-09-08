@@ -14,12 +14,13 @@ import {
 } from '@ant-design/icons';
 import millify from 'millify';
 import { Col, Row, Typography, Select } from 'antd';
+
 const { Title, Text } = Typography;
 const { Option } = Select;
 
 const CryptoDetails = () => {
   const { cryptoId } = useParams();
-  const { data } = useDetailsQuery(cryptoId);
+  const { data, isFetching } = useDetailsQuery(cryptoId);
   console.log(data);
   const coinData = data?.data?.coin;
   console.log(coinData);
@@ -78,6 +79,8 @@ const CryptoDetails = () => {
     },
   ];
 
+  if (isFetching) return console.log('Loading...');
+
   return (
     <>
       <Col>
@@ -89,7 +92,7 @@ const CryptoDetails = () => {
         </Col>
         <Select>
           {time.map((t, i) => (
-            <Option>{t}</Option>
+            <Option key={i}>{t}</Option>
           ))}
         </Select>
       </Col>
