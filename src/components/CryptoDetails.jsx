@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useDetailsQuery } from '../services/CryptoApi';
+import { useGetDetailsQuery } from '../services/CryptoApi';
 import {
   MoneyCollectOutlined,
   DollarCircleOutlined,
@@ -20,33 +20,36 @@ const { Option } = Select;
 
 const CryptoDetails = () => {
   const { cryptoId } = useParams();
-  const { data, isFetching } = useDetailsQuery(cryptoId);
-  console.log(data);
+  const { data, isFetching } = useGetDetailsQuery(cryptoId);
   const coinData = data?.data?.coin;
+  console.log(cryptoId);
+  console.log(data);
   console.log(coinData);
   console.log('*** the above 24 & 25 are log for cryptoDetails and data');
   const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
 
+  const test = millify(Number(coinData.price));
+  console.log(test);
   const stats = [
     {
       title: 'Price to USD',
-      value: `$ ${coinData.price && millify(coinData.price)}`,
+      value: `$ ${Number(coinData.price) && millify(Number(coinData.price))}`,
       icon: <DollarCircleOutlined />,
     },
-    { title: 'Rank', value: coinData.rank, icon: <NumberOutlined /> },
+    { title: 'Rank', value: Number(coinData.rank), icon: <NumberOutlined /> },
     {
       title: '24h Volume',
-      value: `$ ${coinData.volume && millify(coinData.volume)}`,
+      value: `$ ${coinData.volume && millify(Number(coinData.volume))}`,
       icon: <ThunderboltOutlined />,
     },
     {
       title: 'Market Cap',
-      value: `$ ${coinData.marketCap && millify(coinData.marketCap)}`,
+      value: `$ ${coinData.marketCap && millify(Number(coinData.marketCap))}`,
       icon: <DollarCircleOutlined />,
     },
     {
       title: 'All-time-high(daily avg.)',
-      value: `$ ${millify(coinData.allTimeHigh.price)}`,
+      value: `$ ${millify(Number(coinData.allTimeHigh.price))}`,
       icon: <TrophyOutlined />,
     },
   ];
@@ -69,21 +72,20 @@ const CryptoDetails = () => {
     },
     {
       title: 'Total Supply',
-      value: `$ ${millify(coinData.totalSupply)}`,
+      value: `$ ${millify(Number(coinData.totalSupply))}`,
       icon: <ExclamationCircleOutlined />,
     },
     {
       title: 'Circulating Supply',
-      value: `$ ${millify(coinData.circulatingSupply)}`,
+      value: `$ ${millify(Number(coinData.circulatingSupply))}`,
       icon: <ExclamationCircleOutlined />,
     },
   ];
 
-  if (isFetching) return console.log('Loading...');
-
   return (
     <>
-      <Col>
+      <h1>{cryptoId} lkahsdkghksldg lkhsaklhkgs klahsgklhsg lkhsg</h1>
+      {/* <Col>
         <Col>
           <Title>
             {coinData.name} {coinData.slug}
@@ -95,7 +97,7 @@ const CryptoDetails = () => {
             <Option key={i}>{t}</Option>
           ))}
         </Select>
-      </Col>
+      </Col> */}
     </>
   );
 };
