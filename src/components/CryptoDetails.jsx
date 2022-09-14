@@ -111,6 +111,15 @@ const CryptoDetails = () => {
               </Title>
               <p>An overview of {coinData.name}</p>
             </Col>
+            {stats.map(({ title, value, icon }) => (
+              <Col className="coin-stats">
+                <Col className="coin-stats-name">
+                  <Text>{icon}</Text>
+                  <Text>{title}</Text>
+                </Col>
+                <Text className="stats">{value}</Text>
+              </Col>
+            ))}
           </Col>
         </Col>
       </Col>
