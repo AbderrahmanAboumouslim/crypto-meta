@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useGetDetailsQuery } from '../services/CryptoApi';
 import {
@@ -22,21 +22,17 @@ const CryptoDetails = () => {
   const { cryptoId } = useParams();
   const { data, isFetching } = useGetDetailsQuery(cryptoId);
   const coinData = data?.data?.coin;
+  const [timePeriod, setTimePeriod] = useState('7d');
   console.log(cryptoId);
   console.log(data);
 
   console.log('*** the above 24 & 25 are log for cryptoDetails and data');
   const time = ['3h', '24h', '7d', '30d', '1y', '3m', '3y', '5y'];
 
-  const abdo = {
-    title: 'Price to USD',
-    value: coinData.price,
-  };
-
   const stats = [
     {
       title: 'Price to USD',
-      value: coinData.price ? millify(coinData.price) : null,
+      value: coinData.price && millify(coinData.price),
       icon: <DollarCircleOutlined />,
     },
     { title: 'Rank', value: coinData.rank, icon: <NumberOutlined /> },
@@ -90,18 +86,33 @@ const CryptoDetails = () => {
   return (
     <>
       <h1> lkahsdkghksldg lkhsaklhkgs klahsgklhsg lkhsg</h1>
-      <Col>
-        <Col>
-          <Title>
+      <Col className="coin-detail-container">
+        <Col className="coin-heading-container">
+          <Title className="coin-name">
             {coinData.name} {coinData.slug}
           </Title>
           <p>{coinData.name} live stats, market cap and supply.</p>
         </Col>
-        <Select>
+        <Select
+          defaultValue="7d"
+          className="select-timeperiod"
+          placeholder="Select the time"
+          onChange={time => setTimePeriod(time)}
+        >
           {time.map((t, i) => (
             <Option key={i}>{t}</Option>
           ))}
         </Select>
+        <Col className="stats-container">
+          <Col className="coin-value">
+            <Col className="coin-value-statistics-heading">
+              <Title level={3} className="coin-details-heading">
+                {coinData.name} value
+              </Title>
+              <p>An overview of {coinData.name}</p>
+            </Col>
+          </Col>
+        </Col>
       </Col>
     </>
   );
