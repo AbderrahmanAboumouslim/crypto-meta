@@ -14,6 +14,7 @@ import {
 } from '@ant-design/icons';
 import millify from 'millify';
 import { Col, Row, Typography, Select } from 'antd';
+import HTMLReactParser from 'html-react-parser';
 
 const { Title, Text } = Typography;
 const { Option } = Select;
@@ -120,6 +121,45 @@ const CryptoDetails = () => {
                 <Text className="stats">{value}</Text>
               </Col>
             ))}
+          </Col>
+        </Col>
+
+        <Col className="other-stats-info">
+          <Col className="coin-value-statistics-heading">
+            <Title level={3} className="coin-details-heading">
+              Other stats
+            </Title>
+            <p>An overview of all CRYPTOCURRENCIES</p>
+          </Col>
+          {genericStats.map(({ title, value, icon }) => (
+            <Col className="coin-stats">
+              <Col className="coin-stats-name">
+                <Text>{icon}</Text>
+                <Text>{title}</Text>
+              </Col>
+              <Text className="stats">{value}</Text>
+            </Col>
+          ))}
+        </Col>
+        <Col className="coin-desc-link">
+          <Row className="coin-desc">
+            <Title level={3} className="coin-details-heading">
+              What is {coinData.name} ?{HTMLReactParser(coinData.description)}`
+            </Title>
+          </Row>
+          <Col className="coin-links">
+            <Title level={3} className="coin-details-links">
+              {coinData.links.map(link => (
+                <Row className="coin-link" key={link.name}>
+                  <Title level={5} className="link-name">
+                    {link.type}
+                  </Title>
+                  <a href={link.url} target="_blank" rel="noreferrer">
+                    {link.name}
+                  </a>
+                </Row>
+              ))}
+            </Title>
           </Col>
         </Col>
       </Col>
