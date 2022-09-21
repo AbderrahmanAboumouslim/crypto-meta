@@ -40,7 +40,7 @@ const Navbar = () => {
         </Typography.Title>
       </div>
 
-      {isMobile && (
+      {!isMobile && (
         <Menu theme="dark">
           <Menu.Item icon={<HomeOutlined />}>
             <Link to="/">Home</Link>
